@@ -6,8 +6,9 @@ $title = '投稿登録';
 @section('content')
     <div class="card-header">{{ $title }}</div>
     <div class="card-body">
-        {{ Form::open(['route' => 'back.posts.store']) }}
+        <form method="post" action="back.posts.store">
+        @csrf
         @include('back.posts._form')
-        {{ Form::close() }}
+        </form>
     </div>
 @endsection

@@ -6,11 +6,10 @@ $title = '投稿編集';
 @section('content')
 <div class="card-header">投稿編集</div>
 <div class="card-body">
-    {!! Form::model($post, [
-        'route' => ['back.posts.update', $post],
-        'method' => 'put'
-    ]) !!}
+    <form method="post" action="{{ route('back.posts.update', $post) }}">
+    @csrf
+    @method('PUT')
     @include('back.posts._form')
-    {!! Form::close() !!}
+    </form>
 </div>
 @endsection

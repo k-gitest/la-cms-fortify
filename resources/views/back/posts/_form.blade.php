@@ -1,10 +1,9 @@
 <div class="form-group row">
-    {{ Form::label('title', 'タイトル', ['class' => 'col-sm-2 col-form-label']) }}
+    <label for="title" class="col-sm-2 col-form-label">タイトル</label>
+    
     <div class="col-sm-10">
-        {{ Form::text('title', null, [
-            'class' => 'form-control' . ($errors->has('title') ? ' is-invalid' : ''),
-            'required'
-        ]) }}
+        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror )" required value="{{ isset($post->title) ? $post->title : null }}">
+        
         @error('title')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -14,12 +13,11 @@
 </div>
  
 <div class="form-group row">
-    {{ Form::label('body', '内容', ['class' => 'col-sm-2 col-form-label']) }}
+    <label for="body" class="col-sm-2 col-form-label">内容</label>
+    
     <div class="col-sm-10">
-        {{ Form::textarea('body', null, [
-            'class' => 'form-control' . ($errors->has('body') ? ' is-invalid' : ''),
-            'rows' => 5
-        ]) }}
+        <textarea name="body" class="form-control @error('body') is-invalid @enderror )" rows="5">{{ isset($post->body) ? $post->body : null }}</textarea>
+        
         @error('body')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -29,15 +27,14 @@
 </div>
  
 <div class="form-group row">
-    {{ Form::label('is_public', 'ステータス', ['class' => 'col-sm-2 col-form-label']) }}
+    <label for="is_public" class="col-sm-2 col-form-label">ステータス</label>
+    
     <div class="col-sm-10">
         @foreach([1 => '公開', 0 => '非公開'] as $key => $value)
             <div class="form-check form-check-inline">
-                {{ Form::radio('is_public', $key, null, [
-                    'id' => 'is_public'.$key,
-                    'class' => 'form-check-input' . ($errors->has('is_public') ? ' is-invalid' : '')
-                ]) }}
-                {{ Form::label('is_public'.$key, $value, ['class' => 'form-check-label']) }}
+                <input type="radio" name="is_public" id="is_public{{ $key }}" class="form-check-input @error('is_public') is-invalid @enderror" {{ isset($post->is_public)? $post->is_public:'' }} >
+                
+                <label for="is_public{{ $key }}" class="form-check-label">{{ $value }}</label>
                 @if($key === 0)
                     @error('is_public')
                         <div class="invalid-feedback">
@@ -51,15 +48,13 @@
 </div>
  
 <div class="form-group row">
-    {{ Form::label('published_at', '公開日', ['class' => 'col-sm-2 col-form-label']) }}
+    <label for="published_at" class="col-sm-2 col-form-label">公開日</label>
+    
     <div class="col-sm-10">
-        {{ Form::datetime('published_at',
-            isset($post->published_at)
+        <input type="datetime" name="published_at" value="{{ isset($post->published_at)
                 ? $post->published_at->format('Y-m-d H:i')
-                : now()->format('Y-m-d H:i'),
-        [
-            'class' => 'form-control' . ($errors->has('published_at') ? ' is-invalid' : '')
-        ]) }}
+                : now()->format('Y-m-d H:i') }}" class="form-control @error('published_at') is-invalid @enderror">
+        
         @error('published_at')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -71,6 +66,6 @@
 <div class="form-group row">
     <div class="col-sm-10">
         <button type="submit" class="btn btn-primary">保存</button>
-        {{ link_to_route('back.posts.index', '一覧へ戻る', null, ['class' => 'btn btn-secondary']) }}
+        <a href="route('back.posts.index')" class="btn btn-secondary">一覧へ戻る</a>
     </div>
 </div>

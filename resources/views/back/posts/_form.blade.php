@@ -30,9 +30,10 @@
     <label for="is_public" class="col-sm-2 col-form-label">ステータス</label>
     
     <div class="col-sm-10">
+        
         @foreach([1 => '公開', 0 => '非公開'] as $key => $value)
             <div class="form-check form-check-inline">
-                <input type="radio" name="is_public" id="is_public{{ $key }}" class="form-check-input @error('is_public') is-invalid @enderror" {{ isset($post->is_public)? $post->is_public:'' }} >
+                <input type="radio" name="is_public" id="is_public{{ $key }}" class="form-check-input @error('is_public') is-invalid @enderror" {{ $post->is_public == $key ? 'checked' : '' }} value="{{ $key }}">
                 
                 <label for="is_public{{ $key }}" class="form-check-label">{{ $value }}</label>
                 @if($key === 0)
@@ -66,6 +67,6 @@
 <div class="form-group row">
     <div class="col-sm-10">
         <button type="submit" class="btn btn-primary">保存</button>
-        <a href="route('back.posts.index')" class="btn btn-secondary">一覧へ戻る</a>
+        <a href="{{ route('back.posts.index') }}" class="btn btn-secondary">一覧へ戻る</a>
     </div>
 </div>

@@ -13,4 +13,8 @@ class Tag extends Model
         'slug', 'name'
     ];
     
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

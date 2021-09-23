@@ -20,13 +20,13 @@ class Post extends Model
         'published_at' => 'datetime'
     ];
     
-    // 公開のみ表示
+    //スコープ機能　公開のみ表示
     public function scopePublic(Builder $query)
     {
         return $query->where('is_public', true);
     }
  
-    // 公開記事一覧取得
+    //スコープ機能 公開記事一覧取得
     public function scopePublicList(Builder $query , string $tagSlug = null)
     {
         if ($tagSlug) {
@@ -42,7 +42,7 @@ class Post extends Model
             ->paginate(10);
     }
  
-    // 公開記事をIDで取得
+    //スコープ機能 公開記事をIDで取得
     public function scopePublicFindById(Builder $query, int $id)
     {
         return $query->public()->findOrFail($id);

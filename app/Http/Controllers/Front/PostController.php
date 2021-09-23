@@ -17,7 +17,7 @@ class PostController extends Controller
     {
         // 公開・新しい順に表示
         $posts = Post::publicList($tagSlug);
-        $tags = Tag::all()->get();
+        $tags = Tag::all();
 
         return view('front.posts.index', compact('posts', 'tags'));
     }
@@ -52,8 +52,8 @@ class PostController extends Controller
      public function show(int $id)
      {
         $post = Post::publicFindById($id);
-        $tags = Tag::all();
-        return view('front.posts.show', compact('post', 'tags'));
+        
+        return view('front.posts.show', compact('post'));
      }
 
     /**

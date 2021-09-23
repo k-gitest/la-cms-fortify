@@ -36,6 +36,7 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
+        //順番に注意　子シーダーから
         Schema::dropIfExists('post_tag');
         Schema::dropIfExists('tags');
 

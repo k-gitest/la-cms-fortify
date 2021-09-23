@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        //順番に注意
         $this->call(UserSeeder::class);
         $this->call(PostSeeder::class);
         $this->call(TagSeeder::class);

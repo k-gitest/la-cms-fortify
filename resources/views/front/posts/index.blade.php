@@ -14,8 +14,6 @@ $title = '投稿一覧';
                 <tr>
                     <td>{{ $post->published_format }}</td>
                     <td><a href="{{ route('front.posts.show' , $post->id) }}">{{ $post->title}}</a></td>
-                    
-                    
                 </tr>
             @endforeach
         </table>
@@ -24,4 +22,15 @@ $title = '投稿一覧';
         </div>
     @endif
 </div>
+
+<ul class="nav nav-pills mb-2">
+    <li class="nav-item">
+        <a href="{{ route('front.posts.index') }}" class="nav-link{{ request()->segment(3) === null ? ' active' : '' }}">すべて</a>
+    </li>
+@php
+  dd($tags );
+@endphp
+
+
+</ul>
 @endsection

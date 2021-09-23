@@ -64,6 +64,28 @@
 </div>
  
 <div class="form-group row">
+    <label for="tags" class="col-sm-2 control-label">タグ</label>
+
+    <div class="col-sm-10">
+        <div class="{{ $errors->has('tags.*') ? 'is-invalid' : '' }}">
+            @foreach ($tags as $key => $tag)
+                <div class="form-check form-check-inline">
+                    
+                    <input type="checkbox" name="tags[]" class="form-check-input" id="tag{{ $key }}" value="{{ $key }}" {{ $key == $tag ? 'selected' : '' }}>
+                    
+                    <label class="form-check-label" for="tag{{$key}}">{{ $tag }}</label>
+                </div>
+            @endforeach
+        </div>
+        @error('tags.*')
+            <span class="invalid-feedback" role="alert">
+                {{ $message }}
+            </span>
+        @enderror
+    </div>
+</div>
+ 
+<div class="form-group row">
     <div class="col-sm-10">
         <button type="submit" class="btn btn-primary">保存</button>
         <a href="{{route('back.posts.index')}}" class="btn btn-secondary">一覧へ戻る</a>

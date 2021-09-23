@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;//追加
+use Illuminate\Http\Request;
 
 class Post extends Model
 {
@@ -26,9 +27,16 @@ class Post extends Model
     }
  
     // 公開記事一覧取得
-    public function scopePublicList(Builder $query)
+    public function scopePublicList(Builder $query , string $tagSlug = null)
     {
+        if ($tagSlug) {
+            $query->whereHas('tags', function($query) use ($tagSlug) {
+                $query->where('slug', $tagSlug);
+            });
+        }
+        
         return $query
+            ->with('tags')//追加
             ->public()
             ->latest('published_at')
             ->paginate(10);
@@ -49,6 +57,12 @@ class Post extends Model
     //Userモデルとのリレーション設定
     public function user(){
         return $this->belongsTo(User::class);
+    }
+    
+    //Tagモデルとのリレーション設定
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
     
     protected static function boot()

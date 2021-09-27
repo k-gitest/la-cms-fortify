@@ -60,6 +60,6 @@
 <div class="form-group row">
     <div class="col-sm-10">
         <button type="submit" class="btn btn-primary">保存</button>
-        <a href="{{route('back.posts.index')}}" class="btn btn-secondary">一覧へ戻る</a>
+        <a href="{{route('back.users.index')}}" class="btn btn-secondary">一覧へ戻る</a>
     </div>
 </div>

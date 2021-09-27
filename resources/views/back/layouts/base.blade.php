@@ -25,8 +25,14 @@
                         <a class="nav-link" href="{{ route('back.users.index') }}">ユーザー</a>
                     </li>
                     @endcan
-                    
-                    <li class="nav-item"><a class="nav-link" href="{{ route('back.dashboard') }}">ダッシュボード</a></li>
+                    <li class="nav-item{{ Request::is('admin/tags', 'admin/tags/*') ? ' active' : '' }}">
+                        <a class="nav-link" href="{{ route('back.tags.index') }}">タグ</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('back.dashboard') }}">ダッシュボード</a>
+                    </li>
+                    <li class="nav-item{{ Request::is('admin/posts', 'admin/posts/*') ? ' active' : '' }}">
+                        <a class="nav-link" href="{{ route('back.posts.index') }}">投稿</a>
+                    </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link" onClick="(function(){
                             document.getElementById('logout-form').submit();
